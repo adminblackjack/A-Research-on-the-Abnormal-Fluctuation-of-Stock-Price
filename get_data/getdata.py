@@ -6,17 +6,7 @@ import time
 
 rqdatac.init()
 
-#print(rqdatac.user.get_quota())
 
-#value=rqdatac.get_price('000001.XSHE',start_date=20160301,end_date=20200301)
-#value.to_csv('000001.csv')
-#print(rqdatac.user.get_quota())
-'''
-path='C:/Users/Administrator/rq/'
-os.makedirs(path+"2")
-fo=open("begin.in",mode="wb")
-fo.close()
-'''
 path=os.getcwd()
 L=list(path)
 for i in range(0,len(L)):
@@ -24,7 +14,6 @@ for i in range(0,len(L)):
         L[i]='/'
 path=''.join(L)
 os.chdir(path+"/all_stocks")
-#os.makedirs(path+"/1")
 all_stocks=pd.read_csv("all_stocks.csv",encoding="GB18030")
 N=None
 cnt=0
