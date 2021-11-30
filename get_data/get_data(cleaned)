@@ -1,0 +1,24 @@
+import os
+import pandas as pd
+import numpy as np
+import rqdatac as rq
+
+rq.init()
+path=os.getcwd()
+os.chdir(path+'/data')
+path=os.getcwd()
+all_stocks=pd.read_csv("all_stocks.csv",encoding="GB18030")
+cnt=0
+length=len(all_stocks['id'])
+N=None
+for i in range(0,length):
+    if (all_stocks['end_date'][i]<='2016-03-01'):
+        continue
+    if (all_stocks['start_date'][i]>='2019-12-31'):
+        continue 
+    index=all_stocks['id'][i]
+    value=rq.get_price(index,start_date=20160301,end_date=20191231,frequency='1d',adjust_type='pre',skip_suspended=True)
+    if (type(value)==type(N)):
+        continue 
+    os.chdir(path+'/'+index)
+    value.to_csv(index+'_new.csv')
