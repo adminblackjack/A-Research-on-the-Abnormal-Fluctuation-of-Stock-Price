@@ -1,0 +1,18 @@
+import os
+import pandas as pd
+
+path=os.getcwd()
+path=path+'/data'
+os.chdir(path)
+lis=os.listdir()
+length=len(lis)
+for i in range(0,length):
+    if (lis[i][0]>'9' or lis[i][0]<'0'):
+        continue 
+    os.chdir(path+'/'+lis[i])
+    csv=pd.read_csv(lis[i]+'.csv')
+    l=len(csv['total_turnover'])
+    for j in range(0,l):
+        if (csv['total_turnover'][j]==0):
+            csv.drop(j,axis=0,inplace=True)
+    csv.to_csv(lis[i]+'(clean).csv')
