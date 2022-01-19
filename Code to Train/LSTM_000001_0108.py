@@ -22,7 +22,7 @@ else:
 def normalize(dt, data_min,data_range):
     return (dt-data_min)/data_range
 
-def inverse_normalization(dt,data_min, data_range):
+def inverse_normalization(dt,data_min,data_range):
     return dt*data_range+data_min
 
 class Dataset(paddle.io.Dataset):
@@ -99,9 +99,9 @@ def train():
         ckpt_opt_file_path=os.path.join(ckpt_path,'opt.pdparams')
         model.set_state_dict(paddle.load(ckpt_model_file_path))
         opt.set_state_dict(paddle.load(ckpt_opt_file_path))
-    epochs = 400
+    epochs=400
     model.train()
-    for epoch in range(base_epoch,base_epoch + epochs):
+    for epoch in range(base_epoch,base_epoch+epochs):
         for batch_id,data in enumerate(train_loader()):
             x_data=data[0]
             y_data=data[1]
@@ -113,7 +113,7 @@ def train():
             opt.step()
             opt.clear_grad()
             if batch_id%20 == 0:
-                print("epoch：{},batch_id:{},loss:{}".format(epoch,batch_id, loss.numpy()))
+                print("epoch：{},batch_id:{},loss:{}".format(epoch,batch_id,loss.numpy()))
 
         if epoch%50==0:
             paddle.save(model.state_dict(),os.path.join(ckpt_path,'ckpt_model_epoch_{}.pdparams'.format(epoch)))
@@ -134,8 +134,8 @@ def plot_result(test_data,predicted_data,y_label):
     param y_label:y轴的label
     return:None
     '''
-    plt.plot(test_data, color='blue',label='000001 real')
-    plt.plot(predicted_data, color='green',label='000001 predict')
+    plt.plot(test_data,color='blue',label='000001 real')
+    plt.plot(predicted_data,color='green',label='000001 predict')
     plt.title("000001 stock price")
     plt.xlabel('time')
     plt.ylabel(y_label)
