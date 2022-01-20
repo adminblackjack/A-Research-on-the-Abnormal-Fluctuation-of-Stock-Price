@@ -7,8 +7,6 @@ from jqdatasdk import *
 from jqdatasdk import finance
 from sklearn.neighbors import KNeighborsClassifier
 
-auth('13064821939','ChinaHuangJie0710')
-
 df=get_money_flow('002458.XSHE',
         fields=['date','sec_code','change_pct','net_amount_main','net_pct_main']
         ,start_date='2018-04-09',end_date='2020-04-08')
