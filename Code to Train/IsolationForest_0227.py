@@ -63,7 +63,7 @@ for i in range(0,len(lis)):
     train_size=250
     train=all_data[:train_size]
     train_data=TimeSeries.from_pd(train,freq='1d')
-    test=all_data[train_size+1:]
+    test=all_data[train_size:]
     test_data=TimeSeries.from_pd(test,freq='1d')
     if (len(test)<2):
         continue
